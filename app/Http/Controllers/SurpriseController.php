@@ -13,11 +13,11 @@ class SurpriseController
         $hisName = 'ka im';     // namamu
 
         // Nomor WhatsApp-mu, format internasional tanpa "+" dan tanpa 0 di depan (62 = Indonesia)
-        $waNumber = '+6281328384490';
+        $waNumber = '6281328384490';
         $waText   = 'iyaa ayo kaa,lanjutin foto fotonya aku ga keberatan ko';
 
         // Lagu: taruh di public/audio/lagu.mp3
-        $music = asset('audio\lagu.mp3');
+        $music = asset('audio/lagu.mp3');
 
         // Foto: sementara pakai placeholder Unsplash.
         // Nanti ganti dengan foto sendiri, contoh: asset('images/surprise/foto-1.jpg')
