@@ -1,0 +1,178 @@
+/* ============ Halaman Kejutan (dipakai bersama Tailwind) ============ */
+.sp-body {
+    margin: 0;
+    min-height: 100dvh;
+    font-family: 'Nunito', system-ui, sans-serif;
+    color: #5a3a40;
+    background:
+        radial-gradient(120% 80% at 10% 0%, #ffe6ec 0%, transparent 60%),
+        radial-gradient(100% 80% at 100% 100%, #f7dcd2 0%, transparent 55%),
+        #fff6ea;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+}
+.sp-display { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; }
+.sp-hand    { font-family: 'Caveat', cursive; font-weight: 700; }
+
+/* ---------- Welcome ---------- */
+.sp-welcome {
+    background:
+        radial-gradient(90% 60% at 50% 0%, #ffe6ec 0%, transparent 70%),
+        radial-gradient(90% 60% at 50% 100%, #f7dcd2 0%, transparent 70%),
+        #fff6ea;
+    transition: opacity .8s ease, transform .8s ease;
+}
+.sp-welcome.sp-leave { opacity: 0; transform: scale(1.04); pointer-events: none; }
+
+.sp-heart {
+    position: absolute; bottom: -12%;
+    color: #e8a5b3; opacity: 0;
+    animation: sp-rise linear infinite;
+}
+@keyframes sp-rise {
+    0%   { transform: translateY(0) rotate(0);        opacity: 0; }
+    10%  { opacity: .7; }
+    100% { transform: translateY(-115vh) rotate(40deg); opacity: 0; }
+}
+
+/* ---------- Tombol ---------- */
+.sp-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    border: 0; cursor: pointer; font-family: inherit; font-weight: 700; color: #fff;
+    text-decoration: none;
+    background: linear-gradient(135deg, #d58a96, #b76e79 55%, #c98a7a);
+    box-shadow: 0 10px 24px -8px rgba(183, 110, 121, .75);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+.sp-btn:hover { transform: translateY(-2px); }
+.sp-btn:active { transform: translateY(0) scale(.98); }
+.sp-btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; box-shadow: 0 0 0 6px #b76e79; }
+.sp-btn-soft { background: #fff; color: #b76e79; box-shadow: 0 6px 16px -8px rgba(90, 58, 64, .4); }
+
+/* ---------- Panggung & kontrol ---------- */
+.sp-stage-in { animation: sp-fade 1s ease both; }
+@keyframes sp-fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.sp-nav { display: flex; align-items: center; gap: 1rem; margin-top: 1.25rem; }
+.sp-nav .sp-btn { width: 2.9rem; height: 2.9rem; border-radius: 999px; font-size: 1.1rem; }
+
+/* ---------- Pemutar musik (piringan hitam) ---------- */
+.sp-player {
+    position: fixed; top: max(.9rem, env(safe-area-inset-top)); right: .9rem; z-index: 60;
+    width: 3.6rem; height: 3.6rem; padding: 0; border: 0; border-radius: 50%;
+    background: transparent; cursor: pointer;
+    filter: drop-shadow(0 6px 10px rgba(90, 58, 64, .35));
+}
+.sp-player:focus-visible { outline: 3px solid #b76e79; outline-offset: 3px; }
+.sp-vinyl {
+    position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(circle at center,
+        #e8a5b3 0 17%, #2d1f22 18% 20%, #3a2a2d 21% 36%, #2d1f22 37% 39%,
+        #3a2a2d 40% 56%, #2d1f22 57% 59%, #3a2a2d 60% 100%);
+    animation: sp-rotate 4s linear infinite;
+    animation-play-state: paused;
+}
+.sp-vinyl::after { content: ''; position: absolute; inset: 47%; border-radius: 50%; background: #fff6ea; }
+.sp-playing .sp-vinyl { animation-play-state: running; }
+@keyframes sp-rotate { to { transform: rotate(360deg); } }
+.sp-player-icon {
+    position: absolute; right: -.15rem; bottom: -.15rem; width: 1.3rem; height: 1.3rem;
+    display: grid; place-items: center; border-radius: 50%;
+    background: #b76e79; color: #fff; font-size: .6rem; line-height: 1;
+}
+.sp-player-icon::before { content: '▶'; padding-left: 1px; }
+.sp-playing .sp-player-icon::before { content: '❚❚'; font-size: .5rem; letter-spacing: -1px; padding-left: 0; }
+
+/* ---------- Halaman buku (ukuran font memakai cqw = % lebar halaman) ---------- */
+.sp-page {
+    container-type: inline-size;
+    background: linear-gradient(160deg, #fffaf2, #fff1e3);
+    overflow: hidden;
+}
+.sp-inner {
+    position: relative; height: 100%;
+    padding: 9cqw 8cqw; display: flex; flex-direction: column; gap: 4cqw;
+}
+.sp-h     { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; font-size: 8.5cqw; line-height: 1.1; color: #5a3a40; }
+.sp-p     { font-size: 4cqw; line-height: 1.7; color: #6b4a50; }
+.sp-quote { font-family: 'Caveat', cursive; font-weight: 700; font-size: 6.4cqw; line-height: 1.2; color: #b76e79; }
+.sp-photo {
+    width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 2cqw;
+    background: linear-gradient(135deg, #fbe1e6, #f3c9d0);
+    box-shadow: 0 2cqw 4cqw -2cqw rgba(90, 58, 64, .5);
+}
+.sp-divider { width: 14cqw; height: .5cqw; background: #d9a5ac; border-radius: 1cqw; }
+
+/* Cover */
+.sp-cover { background: linear-gradient(150deg, #f6cbd2, #e3a3ad 45%, #c98a7a); color: #fff; }
+.sp-cover-frame { position: absolute; inset: 5cqw; border: .4cqw solid rgba(255, 255, 255, .75); border-radius: 2cqw; pointer-events: none; }
+.sp-cover .sp-inner { align-items: center; justify-content: center; text-align: center; }
+.sp-cover-title {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600;
+    font-size: 12cqw; line-height: 1.05; color: #fff;
+    text-shadow: 0 .4cqw 1.4cqw rgba(120, 60, 70, .35);
+}
+.sp-cover-sub { font-family: 'Caveat', cursive; font-weight: 700; font-size: 7cqw; color: #fff7ee; }
+.sp-cover-heart { width: 16cqw; height: 16cqw; fill: #fff7ee; filter: drop-shadow(0 .6cqw 1cqw rgba(120, 60, 70, .3)); }
+
+/* Polaroid */
+.sp-gallery { padding: 6cqw 7cqw; gap: 2.5cqw; }
+.sp-gallery .sp-h { font-size: 7.5cqw; }
+.sp-polaroid {
+    position: relative; width: 44%;
+    background: #fff; padding: 2cqw 2cqw .8cqw;
+    box-shadow: 0 2cqw 4cqw -1.5cqw rgba(90, 58, 64, .45);
+    transform: rotate(var(--r, 0deg));
+    transition: transform .35s cubic-bezier(.2, .8, .2, 1);
+    cursor: pointer;
+}
+.sp-polaroid img {
+    display: block; width: 100%; aspect-ratio: 1; object-fit: cover;
+    background: linear-gradient(135deg, #fbe1e6, #f3c9d0);
+}
+.sp-polaroid figcaption {
+    font-family: 'Caveat', cursive; font-weight: 700; font-size: 4.6cqw; line-height: 1.1;
+    text-align: center; color: #7a4a52; padding: 1.6cqw 0 1.2cqw;
+}
+.sp-polaroid::before {
+    content: ''; position: absolute; top: -2cqw; left: 50%; width: 13cqw; height: 4.2cqw;
+    transform: translateX(-50%) rotate(-3deg); background: rgba(232, 165, 179, .6);
+}
+.sp-polaroid:hover, .sp-polaroid.sp-up { transform: rotate(0) scale(1.07); z-index: 2; }
+.sp-pl-left  { align-self: flex-start; margin-left: 2cqw; }
+.sp-pl-right { align-self: flex-end; margin-right: 2cqw; margin-top: -5cqw; }
+
+/* Alasan */
+.sp-reasons { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3.4cqw; }
+.sp-reasons li { display: flex; gap: 3cqw; align-items: flex-start; font-size: 4.1cqw; line-height: 1.5; color: #6b4a50; }
+.sp-reasons svg { flex: none; width: 5.2cqw; height: 5.2cqw; margin-top: .6cqw; fill: #d58a96; }
+
+/* Cover belakang */
+.sp-back .sp-inner { align-items: center; justify-content: center; text-align: center; gap: 4.5cqw; }
+.sp-back .sp-p { color: #fff; font-size: 4.2cqw; }
+.sp-back .sp-btn { padding: 3cqw 6cqw; border-radius: 999px; font-size: 4cqw; }
+/* Cover dengan foto latar */
+.sp-cover-photo {
+    background: linear-gradient(150deg, #f6cbd2, #e3a3ad 45%, #c98a7a);
+}
+.sp-cover-bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+}
+.sp-cover-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(90, 40, 50, .30), rgba(90, 40, 50, .62));
+}
+.sp-cover-photo .sp-cover-frame,
+.sp-cover-photo .sp-inner { z-index: 1; }
+.sp-cover-photo .sp-cover-title,
+.sp-cover-photo .sp-cover-sub,
+.sp-cover-photo .sp-p {
+    text-shadow: 0 .4cqw 1.6cqw rgba(60, 25, 35, .6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sp-heart { display: none; }
+    .sp-stage-in { animation: none; }
+    .sp-vinyl { animation-duration: 12s; }
+}
